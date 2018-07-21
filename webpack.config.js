@@ -1,4 +1,6 @@
-const path = require('path');
+const path = require('path'),
+    HtmlWebPackPlugin = require('html-webpack-plugin'),
+    webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -17,13 +19,14 @@ module.exports = {
         rules: [{
             test: /\.(js|jsx)$/,
             exclude: /node_modules/,
-            use :{
+            use: {
                 loader: 'babel-loader'
             }
         }/*,
     { enforce: "pre", test: /\.(js|jsx)$/, loader: "source-map-loader" }*/]
     },
     plugins: [
-
+        new HtmlWebPackPlugin({ template: path.resolve(__dirname, 'src', 'app', 'index.html') }),
+        new webpack.HotModuleReplacementPlugin()
     ]
 }
